@@ -1,0 +1,147 @@
+@model HospitalSolutions.Models.PregledForma
+@{
+    ViewData["Title"] = "Dokumentiranje pregleda";
+    var idPacienta = (int)(ViewData["IdPacienta"] ?? 0);
+    var jeKonflikt = (bool)(ViewData["JeKonflikt"] ?? false);
+}
+
+<div class="pregled-forma">
+    <div class="page-header">
+        <a asp-action="Index" class="back-link">← Nazaj na seznam pacientov</a>
+        <h1>Dokumentiranje pregleda</h1>
+    </div>
+
+    @if (jeKonflikt)
+    {
+        <div class="alert alert-danger alergija-opozorilo">
+            <strong>⚠ Opozorilo o alergiji!</strong>
+            <p>@Model.Sporocilo</p>
+            <p class="opozorilo-navodilo">Prosim, popravite terapijo in poskusite znova.</p>
+        </div>
+    }
+
+    <div class="pregled-layout">
+        <aside class="pacient-povzetek">
+            <h2>Podatki pacienta</h2>
+            <div class="info-block">
+                <div class="info-label">Ime in priimek</div>
+                <div class="info-big">@Model.Pacient.Ime @Model.Pacient.Priimek</div>
+            </div>
+            <div class="info-block">
+                <div class="info-label">EMŠO</div>
+                <div class="info-value">@Model.Pacient.Emso</div>
+            </div>
+            <div class="info-block">
+                <div class="info-label">Datum rojstva</div>
+                <div class="info-value">@Model.Pacient.DatumRojstva.ToString("dd. MM. yyyy")</div>
+            </div>
+            <div class="info-block">
+                <div class="info-label">Znane alergije</div>
+                <div class="info-value">
+                    @if (Model.Pacient.Alergije.Count == 0)
+                    {
+                        <span class="badge badge-success">brez znanih</span>
+                    }
+                    else
+                    {
+                        foreach (var a in Model.Pacient.Alergije)
+                        {
+                            <span class="badge badge-warning">@a</span>
+                        }
+                    }
+                </div>
+            </div>
+
+            <h3>Zgodovina pregledov</h3>
+            @if (Model.Zgodovina.Count == 0)
+            {
+                <p class="empty-state">Ni prejšnjih pregledov.</p>
+            }
+            else
+            {
+                <ul class="zgodovina-list">
+                    @foreach (var z in Model.Zgodovina)
+                    {
+                        <li>
+                            <div class="zgodovina-datum">@z.Datum.ToString("dd. MM. yyyy")</div>
+                            <div class="zgodovina-opombe">@z.Opombe</div>
+                            @if (z.Diagnoza.Count > 0)
+                            {
+                                <div class="zgodovina-podrobnost">
+                                    <strong>Diagnoze:</strong>
+                                    @foreach (HospitalSolutions.Models.Diagnoza d in z.Diagnoza)
+                                    {
+                                        <span>@d.Opis (@d.Koda)</span>
+                                    }
+                                </div>
+                            }
+                            @if (z.Terapija.Count > 0)
+                            {
+                                <div class="zgodovina-podrobnost">
+                                    <strong>Terapije:</strong>
+                                    @foreach (HospitalSolutions.Models.Terapija t in z.Terapija)
+                                    {
+                                        <span>@t.Naziv</span>
+                                    }
+                                </div>
+                            }
+                        </li>
+                    }
+                </ul>
+            }
+        </aside>
+
+        <section class="vnos-form">
+            <form asp-action="Shrani" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="idPacienta" value="@idPacienta" />
+
+                <fieldset class="form-group-block">
+                    <legend>Diagnoza</legend>
+                    <div class="form-group">
+                        <label for="opisDiagnoze">Opis diagnoze</label>
+                        <input type="text" id="opisDiagnoze" name="opisDiagnoze"
+                               class="form-control" required
+                               value="@(Model.Diagnoza != null ? Model.Diagnoza.Opis : "")"
+                               placeholder="npr. Vnetje grla" />
+                    </div>
+                    <div class="form-group">
+                        <label for="kodaDiagnoze">Koda</label>
+                        <input type="text" id="kodaDiagnoze" name="kodaDiagnoze"
+                               class="form-control" required
+                               value="@(Model.Diagnoza != null ? Model.Diagnoza.Koda : "")"
+                               placeholder="npr. V1" />
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group-block @(jeKonflikt ? "highlight-konflikt" : "")">
+                    <legend>Terapija</legend>
+                    <div class="form-group">
+                        <label for="nazivTerapije">Naziv terapije</label>
+                        <input type="text" id="nazivTerapije" name="nazivTerapije"
+                               class="form-control" required
+                               value="@(Model.Terapija != null ? Model.Terapija.Naziv : "")"
+                               placeholder="npr. Paracetamol" />
+                        @if (jeKonflikt)
+                        {
+                            <small class="form-hint">Ta terapija sproži alergijski konflikt. Spremenite jo.</small>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="navodilaTerapije">Navodila</label>
+                        <textarea id="navodilaTerapije" name="navodilaTerapije"
+                                  class="form-control" rows="3" required
+                                  placeholder="npr. 1 tableta zjutraj in zvečer">@(Model.Terapija != null ? Model.Terapija.Navodila : "")</textarea>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <a asp-action="Index" class="btn btn-secondary">Prekliči</a>
+                    <button type="submit" class="btn btn-primary btn-large">
+                        Potrdi in shrani pregled
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

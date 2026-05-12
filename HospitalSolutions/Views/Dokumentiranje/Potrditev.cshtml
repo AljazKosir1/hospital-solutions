@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Pregled shranjen";
+    var sporocilo = TempData["UspesnoShranjeno"] as string;
+    var diagnozaOpis = TempData["DiagnozaOpis"] as string;
+    var diagnozaKoda = TempData["DiagnozaKoda"] as string;
+    var terapijaNaziv = TempData["TerapijaNaziv"] as string;
+    var terapijaNavodila = TempData["TerapijaNavodila"] as string;
+}
+
+<div class="potrditev">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h1>Pregled uspešno dokumentiran</h1>
+        @if (!string.IsNullOrEmpty(sporocilo))
+        {
+            <p class="lead">@sporocilo</p>
+        }
+
+        @if (!string.IsNullOrEmpty(diagnozaOpis))
+        {
+            <div class="povzetek-block">
+                <h3>Diagnoza</h3>
+                <p><strong>@diagnozaOpis</strong> <span class="koda">(@diagnozaKoda)</span></p>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(terapijaNaziv))
+        {
+            <div class="povzetek-block">
+                <h3>Terapija</h3>
+                <p><strong>@terapijaNaziv</strong></p>
+                <p class="navodila">@terapijaNavodila</p>
+            </div>
+        }
+
+        <div class="form-actions">
+            <a asp-action="Index" class="btn btn-primary">Nazaj na seznam pacientov</a>
+        </div>
+    </div>
+</div>

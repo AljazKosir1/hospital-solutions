@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "HospitalSolutions";
+}
+
+<div class="hero">
+    <h1>HospitalSolutions</h1>
+    <p class="lead">Sistem za podporo zdravniškemu delu</p>
+    <p class="hero-sub">Primer uporabe: <strong>Dokumentiranje pregleda</strong></p>
+    <a class="btn btn-primary btn-large" asp-controller="Dokumentiranje" asp-action="Index">
+        Začni dokumentiranje pregleda →
+    </a>
+</div>
+
+<div class="info-section">
+    <h2>O sistemu</h2>
+    <div class="info-grid">
+        <div class="info-card">
+            <h3>Akter</h3>
+            <p>Zdravnik (prijavljen v sistem)</p>
+        </div>
+        <div class="info-card">
+            <h3>Cilj</h3>
+            <p>Pregled je dokumentiran, diagnoza in terapija sta shranjeni.</p>
+        </div>
+        <div class="info-card">
+            <h3>Alergije</h3>
+            <p>Sistem preveri pacientove alergije in opozori, če terapija ni primerna.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+@model HospitalSolutions.Models.PacientiListView
+@{
+    ViewData["Title"] = "Seznam pacientov";
+}
+
+<div class="seznam-pacientov">
+    <div class="page-header">
+        <h1>Seznam pacientov</h1>
+        <p class="lead">Izberite pacienta za dokumentiranje pregleda.</p>
+    </div>
+
+    @if (TempData["Napaka"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Napaka"]
+        </div>
+    }
+
+    @if (Model.SeznamPacientov.Count == 0)
+    {
+        <div class="alert alert-warning">
+            V sistemu ni nobenega pacienta.
+        </div>
+    }
+    else
+    {
+        <div class="pacient-grid">
+            @for (int i = 0; i < HospitalSolutions.Models.Repository.Pacienti.Count; i++)
+            {
+                var p = HospitalSolutions.Models.Repository.Pacienti[i];
+                int id = i + 1;
+                <div class="pacient-card">
+                    <div class="pacient-card-header">
+                        <span class="pacient-id">#@id</span>
+                        <h3>@p.Ime @p.Priimek</h3>
+                    </div>
+                    <div class="pacient-card-body">
+                        <div class="pacient-info-row">
+                            <span class="info-label">EMŠO:</span>
+                            <span class="info-value">@p.Emso</span>
+                        </div>
+                        <div class="pacient-info-row">
+                            <span class="info-label">Rojen:</span>
+                            <span class="info-value">@p.DatumRojstva.ToString("dd. MM. yyyy")</span>
+                        </div>
+                        <div class="pacient-info-row">
+                            <span class="info-label">Alergije:</span>
+                            <span class="info-value">
+                                @if (p.Alergije.Count == 0)
+                                {
+                                    <span class="badge badge-success">brez znanih</span>
+                                }
+                                else
+                                {
+                                    foreach (var a in p.Alergije)
+                                    {
+                                        <span class="badge badge-warning">@a</span>
+                                    }
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pacient-card-footer">
+                        <a class="btn btn-primary" asp-action="Pregled" asp-route-idPacienta="@id">
+                            Dokumentiraj pregled →
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,219 @@
+body {
+  background: #f5f7fa;
+  color: #222;
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin-bottom: 60px;
+}
+
+h1 {
+  color: #0a6bb8;
+}
+
+.page-header {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.back-link {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.hero {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.info-grid,
+.pacient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.info-card,
+.pacient-card,
+.pacient-povzetek,
+.vnos-form,
+.success-card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 1rem;
+}
+
+.pacient-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.pacient-card-body {
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.pacient-info-row {
+  padding: 0.2rem 0;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #555;
+  margin-right: 0.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+}
+
+.badge-success {
+  background: #e4f4e8;
+  color: #1b6b34;
+}
+
+.badge-warning {
+  background: #fff1cf;
+  color: #8a5a00;
+}
+
+.pregled-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 800px) {
+  .pregled-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.zgodovina-list {
+  list-style: none;
+  padding: 0;
+}
+
+.zgodovina-list li {
+  background: #f8f9fb;
+  border-left: 3px solid #1592e5;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-group-block {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group-block legend {
+  color: #0a6bb8;
+  font-weight: 600;
+  width: auto;
+  padding: 0 0.5rem;
+}
+
+.highlight-konflikt {
+  border-color: #e44d4d;
+  background: #fff5f5;
+}
+
+.form-group {
+  margin-bottom: 0.75rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-family: inherit;
+}
+
+.form-hint {
+  color: #d23838;
+  font-size: 0.85rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: #0a6bb8;
+  color: white;
+}
+
+.btn-secondary {
+  background: #ddd;
+  color: #333;
+}
+
+.alert {
+  padding: 0.75rem;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+
+.alert-danger {
+  background: #ffeaea;
+  border: 1px solid #f4b6b6;
+  color: #9b1f1f;
+}
+
+.alert-warning {
+  background: #fff7e0;
+  border: 1px solid #f5d479;
+  color: #7a5800;
+}
+
+.success-card {
+  max-width: 520px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.success-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  background: #2ec46c;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  border-radius: 50%;
+  line-height: 60px;
+}
+
+.povzetek-block {
+  background: #f8f9fb;
+  padding: 0.75rem;
+  margin: 0.75rem 0;
+  text-align: left;
+}
