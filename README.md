@@ -1,8 +1,10 @@
 # Zagon aplikacije
 ### 1. način
-1. Razpakiraj `publish.zip` (Path: HospitalSolutions/bin/Release/net7.0/win-x64/publish)
-2. Odpri `HospitalSolutions.exe`
-3. V konzoli boš videl vrstico `Now listening on: http://localhost:XXXX`. Skopiraj ta URL v browser.
+1. Prenesi ZIP s kodo
+2. Razpakiraj ZIP
+3. V file explorerju pojdi na: `HospitalSolutions/bin/Release/net7.0/win-x64/publish`
+4. Odpri `HospitalSolutions.exe`
+5. V konzoli boš videl vrstico `Now listening on: http://localhost:XXXX`. Skopiraj URL v brskalnik.
 
 ### 2. način
 1. Kloniraj repozitorij
